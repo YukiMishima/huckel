@@ -31,21 +31,23 @@ equations.append(c1**2 + c2**2 + c3**2 + c4**2 + c5**2 -1)
 
 print('coefficient')
 for ans in answer:
-    print(ans)
+    print('energy:'+str(float(ans)))
     equations_subs = [equation.subs(x, ans) for equation in equations]
     coeff = solve(equations_subs)
     print(coeff)
+    X=0
+    fig = plt.figure()
+    ax = plt.axes()
+    ax.set_xlim(0, 6)
+    for rad in coeff[0].values():
+        
+        X += 6/5
+        c_up = pat.Circle(xy = (X, rad), radius = rad, color='blue')
+        ax.add_patch(c_up)
+        c_down = pat.Circle(xy=(X,-rad), radius = rad, color='red')
+        ax.add_patch(c_down)
     print('-------------------------')
 
-fig = plt.figure()
-ax = plt.axes()
-# ax = fig.add_subplot(1,1,1)
-rad = 0.25
-c_up = pat.Circle(xy = (rad, rad), radius = rad, color='blue')
-ax.add_patch(c_up)
-c_down = pat.Circle(xy=(rad,-rad), radius = rad, color='red')
-ax.add_patch(c_down)
-# plt.ylim(1,-1)
-plt.axis('scaled')
-ax.set_aspect('equal')
-plt.show()
+    plt.axis('scaled')
+    ax.set_aspect('equal')
+    plt.show()
