@@ -15,7 +15,7 @@ matrix = Matrix([
 ])
 
 answer = solve(matrix.det(), x)
-energy = [a+X*b for X in answer]
+energy = [a+ans*b for ans in answer]
 print('energy')
 print(energy)
 print('-----------------------')
@@ -23,4 +23,11 @@ print('-----------------------')
 c1, c2, c3, c4 = symbols('c1 c2 c3 c4')
 coefficient = Matrix([[c1, c2, c3, c4]]).T
 
-print(matrix * coefficient)
+equations = [equation for equation in matrix * coefficient]
+equations.append(c1**2 + c2**2 + c3**2 + c4**2 -1)
+
+print('coefficient')
+for ans in answer:
+    equations_subs = [equation.subs(x, ans) for equation in equations]
+    coeff = solve(equations_subs)
+    print(coeff)
